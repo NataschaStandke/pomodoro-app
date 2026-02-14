@@ -1,6 +1,26 @@
-# Getting Started with Create React App
+# A pomodoro timer created with React + Electron
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
+
+## Prerequisites
+
+- Node.js installed: https://nodejs.org/en/download
+
+### Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+
+To create your own app run:
+
+```
+npx create-react-app pomodoro --template typescript
+```
+
+### Install electron 
+
+```
+npx create-react-app pomodoro --template typescript
+```
 
 ## Available Scripts
 
@@ -31,7 +51,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run electron`
 
-To run app
+To run your electron app
 
 
 ## Learn More
