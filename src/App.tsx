@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -22,12 +23,18 @@ function App() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  const switchMode = (breakMode: boolean) => {
+    setIsBreak(breakMode);
+    setIsRunning(false);
+    setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
+  };
+
   const handleStart = () => {
     if (!isRunning) {
       setIsRunning(true);
     } else {
       setIsRunning(false);
-      setTimeLeft(25 * 60);
+      setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
     }
   };
 
@@ -40,8 +47,8 @@ function App() {
 
       <div className="home-content">
         <div className="home-controls">
-          <button className="image-button">Concentrate</button>
-          <button className="image-button">Take break</button>
+          <button className="image-button" onClick={() => switchMode(false)}>Concentrate</button>
+          <button className="image-button" onClick={() => switchMode(true)}>Take break</button>
         </div>
 
         <p>Tschakka!</p>
