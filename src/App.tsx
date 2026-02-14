@@ -6,7 +6,38 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
+  const [motivation, setMotivation] = useState("");
 
+  const motivationalQuotes = [
+    "Tschakka!",
+    "Push it!",
+    "Tits up!",
+    "Believe in your selfie!"
+  ];
+
+  const breakQuotes = [
+    "SnackieSnacks!",
+    "Love you <3",
+    "Stay hydrated, bitch!",
+    "Relax, nothing is under control!"
+  ];
+
+  // Motivational Quotes Updater
+  useEffect(() => {
+    let quoteInterval: NodeJS.Timeout;
+    if (isRunning) {
+      const quotes = isBreak ? breakQuotes : motivationalQuotes;
+      setMotivation(quotes[Math.floor(Math.random() * quotes.length)]);
+      quoteInterval = setInterval(() => {
+        setMotivation(quotes[Math.floor(Math.random() * quotes.length)]);
+      }, 10000);
+    } else {
+      setMotivation(motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]);
+    }
+    return () => clearInterval(quoteInterval);
+  }, [isRunning, isBreak]);
+
+  // Timer
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isRunning && timeLeft > 0) {
@@ -51,7 +82,7 @@ function App() {
           <button className="image-button" onClick={() => switchMode(true)}>Take break</button>
         </div>
 
-        <p>Tschakka!</p>
+        <p className={`motivation-quotes${!isRunning ? " hidden" : ""}`}>{motivation}</p>
         <h1 className="home-timer">{formatTime(timeLeft)}</h1>
         <button className="home-button" onClick={handleStart}>{isRunning ? "Stop" : "Start"}</button>
       </div>
