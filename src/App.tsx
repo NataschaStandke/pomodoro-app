@@ -6,7 +6,7 @@ import concentrateImg from './assets/concentrate.png';
 import breakImg from './assets/break.png';
 import concentraImgInactive from './assets/concentrate-inactive.png';
 import breakImgInactive from './assets/break-inactive.png';
-import
+import closeImg from './assets/close.png';
 import soundEffect from './assets/sound-effect.mp3';
 
 function App() {
