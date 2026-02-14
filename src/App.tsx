@@ -80,7 +80,9 @@ function App() {
     <div style={{ position: 'relative' }}>
 
       <div>
-        <button className="close-button">Close</button>
+        <button className="close-button">
+          <img src={closeImg} alt="Close" />
+        </button>
       </div>
 
       <div className="home-content">
