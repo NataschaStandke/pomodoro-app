@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import concentrateImg from './assets/concentrate.png';
+import breakImg from './assets/break.png';
+import concentraImgInactive from './assets/concentrate-inactive.png';
+import breakImgInactive from './assets/break-inactive.png';
+import
+import soundEffect from './assets/sound-effect.mp3';
+
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);

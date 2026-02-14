@@ -32,7 +32,53 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.home-controls {
+  display: flex;
+  gap: 20px;
+}
+
+.close-button img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.image-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.home-timer {
+  font-size: 48px;
+  margin: 0;
+}
+
+.home-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.motivation-quotes {
+  font-size: 24px;
+  color: #61dafb;
+}
+
+.hidden {
+  display: none;
 }
