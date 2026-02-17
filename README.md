@@ -79,5 +79,4 @@ To learn about Electron go to [Electron documentation](https://www.electronjs.or
 
 The images I am using are AI generated
 
-Sound Effect by <a href="https://pixabay.com/users/alexis_gaming_cam-50011695/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=346114">ALEXIS_GAMING_CAM</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=346114">Pixabay</a>
-
+Sound Effect by <a href="https://pixabay.com/users/alexis_gaming_cam-50011695">ALEXIS_GAMING_CAM</a> from <a href="https://pixabay.com/sound-effects">Pixabay</a>

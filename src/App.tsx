@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+/// <reference types="./custom" />
+
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 
 import concentrateImg from './assets/concentrate_active.png';
@@ -7,7 +8,7 @@ import breakImg from './assets/break_active.png';
 import concentraImgInactive from './assets/concentrate_inactive.png';
 import breakImgInactive from './assets/break_inactive.png';
 import closeImg from './assets/close.png';
-import soundEffect from './assets/sound-effect.mp3';
+import soundEffect from './assets/among-us-alarme-sabotage.mp3';
 import startButtonImage from './assets/start.png';
 
 function App() {
@@ -18,21 +19,22 @@ function App() {
   const [isBreak, setIsBreak] = useState(false);
   const [motivation, setMotivation] = useState("");
   const [playImage, setPlayImage] = useState(startButtonImage);
-  const audio = new Audio(soundEffect);
 
-  const motivationalQuotes = [
+  const audio = useMemo(() => new Audio(soundEffect), []);
+
+  const motivationalQuotes = useMemo(() => [
     "Tschakka!",
     "Push it!",
     "Tits up!",
     "Believe in your selfie!"
-  ];
+  ], []);
 
-  const breakQuotes = [
+  const breakQuotes = useMemo(() => [
     "SnackieSnacks!",
     "Love you <3",
     "Stay hydrated, bitch!",
     "Relax, nothing is under control!"
-  ];
+  ], []);
 
   // Motivational Quotes Updater
   useEffect(() => {
@@ -47,7 +49,7 @@ function App() {
       setMotivation(motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]);
     }
     return () => clearInterval(quoteInterval);
-  }, [isRunning, isBreak]);
+  }, [isRunning, isBreak, breakQuotes, motivationalQuotes]);
 
   // Timer
   useEffect(() => {
@@ -71,7 +73,7 @@ function App() {
       setPlayImage(startButtonImage);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
     }
-  }, [timeLeft]);
+  }, [timeLeft, audio, isBreak, isRunning]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -93,14 +95,23 @@ function App() {
     } else {
       setIsRunning(false);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
+      setPlayImage(startButtonImage);
     }
   };
 
+  const handleClose = () => {
+    if (window.electronAPI?.closeApp) {
+      window.electronAPI.closeApp();
+    } else {
+      console.warn("Electron API not available");
+    }
+  }
+
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="app-container" style={{ position: 'relative' }}>
 
       <div>
-        <button className="close-button">
+        <button className="close-button" onClick={handleClose}>
           <img src={closeImg} alt="Close" />
         </button>
       </div>
@@ -118,7 +129,7 @@ function App() {
         <p className={`motivation-quotes${!isRunning ? " hidden" : ""}`}>{motivation}</p>
         <h1 className="home-timer">{formatTime(timeLeft)}</h1>
         <button className="home-button" onClick={handleStart}>
-          <img src={startButtonImage} alt="Start" />
+          <img src={playImage} alt="Start" />
         </button>
       </div>
     </div >

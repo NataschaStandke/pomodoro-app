@@ -22,6 +22,17 @@
   gap: 20px
 }
 
+.motivation-quotes {
+  font-size: 24px;
+  color: #b16ccd;
+  margin-bottom: 20px;
+  transition: opacity 0.5s ease;
+}
+
+motivation-quotes.hidden {
+  opacity: 0;
+}
+
 .close-button {
   position: absolute;
   top: 10px;
