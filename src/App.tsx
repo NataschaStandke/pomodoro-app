@@ -8,6 +8,7 @@ import concentraImgInactive from './assets/concentrate_inactive.png';
 import breakImgInactive from './assets/break_inactive.png';
 import closeImg from './assets/close.png';
 import soundEffect from './assets/sound-effect.mp3';
+import startButtonImage from './assets/start.png';
 
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
@@ -16,6 +17,8 @@ function App() {
   const [concentrateButtonImage, setConcentrateButtonImage] = useState(concentrateImg);
   const [isBreak, setIsBreak] = useState(false);
   const [motivation, setMotivation] = useState("");
+  const [playImage, setPlayImage] = useState(startButtonImage);
+  const audio = new Audio(soundEffect);
 
   const motivationalQuotes = [
     "Tschakka!",
@@ -55,7 +58,20 @@ function App() {
       }, 1000);
     }
     return () => clearInterval(timer);
-  });
+  }, [isRunning, timeLeft]);
+
+  useEffect(() => {
+    switchMode(false);
+  }, []);
+
+  useEffect(() => {
+    if (timeLeft === 0 && isRunning) {
+      audio.play();
+      setIsRunning(false);
+      setPlayImage(startButtonImage);
+      setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
+    }
+  }, [timeLeft]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -91,13 +107,19 @@ function App() {
 
       <div className="home-content">
         <div className="home-controls">
-          <button className="image-button" onClick={() => switchMode(false)}><img src={concentrateButtonImage} alt="Concentrate" /></button>
-          <button className="image-button" onClick={() => switchMode(true)}><img src={breakButtonImage} alt="Break" /></button>
+          <button className="image-button" onClick={() => switchMode(false)}>
+            <img src={concentrateButtonImage} alt="Concentrate" />
+          </button>
+          <button className="image-button" onClick={() => switchMode(true)}>
+            <img src={breakButtonImage} alt="Break" />
+          </button>
         </div>
 
         <p className={`motivation-quotes${!isRunning ? " hidden" : ""}`}>{motivation}</p>
         <h1 className="home-timer">{formatTime(timeLeft)}</h1>
-        <button className="home-button" onClick={handleStart}>{isRunning ? "Stop" : "Start"}</button>
+        <button className="home-button" onClick={handleStart}>
+          <img src={startButtonImage} alt="Start" />
+        </button>
       </div>
     </div >
   );
