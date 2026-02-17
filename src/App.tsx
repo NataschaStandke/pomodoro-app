@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import concentrateImg from './assets/concentrate.png';
-import breakImg from './assets/break.png';
-import concentraImgInactive from './assets/concentrate-inactive.png';
-import breakImgInactive from './assets/break-inactive.png';
+import concentrateImg from './assets/concentrate_active.png';
+import breakImg from './assets/break_active.png';
+import concentraImgInactive from './assets/concentrate_inactive.png';
+import breakImgInactive from './assets/break_inactive.png';
 import closeImg from './assets/close.png';
 import soundEffect from './assets/sound-effect.mp3';
 
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
+  const [breakButtonImage, setBreakButtonImage] = useState(breakImg);
+  const [concentrateButtonImage, setConcentrateButtonImage] = useState(concentrateImg);
   const [isBreak, setIsBreak] = useState(false);
   const [motivation, setMotivation] = useState("");
 
@@ -64,6 +66,8 @@ function App() {
   const switchMode = (breakMode: boolean) => {
     setIsBreak(breakMode);
     setIsRunning(false);
+    setBreakButtonImage(breakMode ? breakImgInactive : breakImg);
+    setConcentrateButtonImage(breakMode ? concentrateImg : concentraImgInactive);
     setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
   };
 
@@ -87,8 +91,8 @@ function App() {
 
       <div className="home-content">
         <div className="home-controls">
-          <button className="image-button" onClick={() => switchMode(false)}>Concentrate</button>
-          <button className="image-button" onClick={() => switchMode(true)}>Take break</button>
+          <button className="image-button" onClick={() => switchMode(false)}><img src={concentrateButtonImage} alt="Concentrate" /></button>
+          <button className="image-button" onClick={() => switchMode(true)}><img src={breakButtonImage} alt="Break" /></button>
         </div>
 
         <p className={`motivation-quotes${!isRunning ? " hidden" : ""}`}>{motivation}</p>
