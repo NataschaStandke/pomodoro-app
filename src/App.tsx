@@ -102,8 +102,10 @@ function App() {
   const handleClose = () => {
     if (window.electronAPI?.closeApp) {
       window.electronAPI.closeApp();
+    } else if (typeof window.close === 'function') {
+      window.close();
     } else {
-      console.warn("Electron API not available");
+      console.warn("Electron API not available and window.close is not callable");
     }
   }
 

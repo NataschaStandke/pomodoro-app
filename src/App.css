@@ -19,18 +19,23 @@
 
 .home-controls {
   display: flex;
-  gap: 20px
+  gap: 20px;
+  margin-bottom: 12px;
+  /* space between controls and timer */
 }
 
 .motivation-quotes {
   font-size: 24px;
   color: #b16ccd;
-  margin-bottom: 20px;
-  transition: opacity 0.5s ease;
+  margin-bottom: 12px;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  min-height: 32px;
+  line-height: 1.2;
 }
 
-motivation-quotes.hidden {
+.motivation-quotes.hidden {
   opacity: 0;
+  visibility: hidden;
 }
 
 .close-button {
@@ -42,9 +47,15 @@ motivation-quotes.hidden {
   cursor: pointer;
 }
 
+.close-button {
+  padding: 6px;
+  border-radius: 6px;
+}
+
 .close-button img {
-  width: 40px;
+  width: 56px;
   height: auto;
+  display: block;
 }
 
 .image-button {
@@ -62,6 +73,7 @@ motivation-quotes.hidden {
   font-size: 60px;
   color: #b16ccd;
   margin: 0;
+  align-self: center;
 }
 
 .home-button {
@@ -75,11 +87,7 @@ motivation-quotes.hidden {
   height: auto;
 }
 
-.motivation-quotes {
-  font-size: 24px;
-  color: #b16ccd;
-}
-
 .hidden {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
 }
