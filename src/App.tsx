@@ -3,22 +3,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 
-import concentrateImg from './assets/concentrate_active.png';
-import breakImg from './assets/break_active.png';
-import concentraImgInactive from './assets/concentrate_inactive.png';
-import breakImgInactive from './assets/break_inactive.png';
-import closeImg from './assets/close.png';
 import soundEffect from './assets/among-us-alarme-sabotage.mp3';
-import startButtonImage from './assets/start.png';
 
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
-  const [breakButtonImage, setBreakButtonImage] = useState(breakImg);
-  const [concentrateButtonImage, setConcentrateButtonImage] = useState(concentrateImg);
   const [isBreak, setIsBreak] = useState(false);
   const [motivation, setMotivation] = useState("");
-  const [playImage, setPlayImage] = useState(startButtonImage);
 
   const audio = useMemo(() => new Audio(soundEffect), []);
 
@@ -70,7 +61,6 @@ function App() {
     if (timeLeft === 0 && isRunning) {
       audio.play();
       setIsRunning(false);
-      setPlayImage(startButtonImage);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
     }
   }, [timeLeft, audio, isBreak, isRunning]);
@@ -84,8 +74,6 @@ function App() {
   const switchMode = (breakMode: boolean) => {
     setIsBreak(breakMode);
     setIsRunning(false);
-    setBreakButtonImage(breakMode ? breakImgInactive : breakImg);
-    setConcentrateButtonImage(breakMode ? concentrateImg : concentraImgInactive);
     setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
   };
 
@@ -95,7 +83,6 @@ function App() {
     } else {
       setIsRunning(false);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
-      setPlayImage(startButtonImage);
     }
   };
 
@@ -110,31 +97,24 @@ function App() {
   }
 
   return (
-    <div className="app-container" style={{ position: 'relative' }}>
-
-      <div>
-        <button className="close-button" onClick={handleClose}>
-          <img src={closeImg} alt="Close" />
-        </button>
-      </div>
-
+    <main className="app-container">
+      <button className="close-button" onClick={handleClose} aria-label="Close app">×</button>
       <div className="home-content">
-        <div className="home-controls">
-          <button className="image-button" onClick={() => switchMode(false)}>
-            <img src={concentrateButtonImage} alt="Concentrate" />
-          </button>
-          <button className="image-button" onClick={() => switchMode(true)}>
-            <img src={breakButtonImage} alt="Break" />
-          </button>
-        </div>
-
-        <p className={`motivation-quotes${!isRunning ? " hidden" : ""}`}>{motivation}</p>
-        <h1 className="home-timer">{formatTime(timeLeft)}</h1>
-        <button className="home-button" onClick={handleStart}>
-          <img src={playImage} alt="Start" />
-        </button>
+        <section className="timer-card" aria-label="Pomodoro timer">
+          <div className="home-controls" aria-label="Choose timer mode">
+            <button className={`mode-button${!isBreak ? ' selected' : ''}`} onClick={() => switchMode(false)} aria-pressed={!isBreak}>
+              Focus
+            </button>
+            <button className={`mode-button${isBreak ? ' selected' : ''}`} onClick={() => switchMode(true)} aria-pressed={isBreak}>
+              Break
+            </button>
+          </div>
+          <p className={`motivation-quotes${!isRunning ? " hidden" : ""}`} aria-live="polite">{motivation}</p>
+          <h1 className="home-timer">{formatTime(timeLeft)}</h1>
+          <button className="home-button" onClick={handleStart}>{isRunning ? 'Reset' : 'Start'}</button>
+        </section>
       </div>
-    </div >
+    </main>
   );
 }
 

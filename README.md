@@ -1,82 +1,48 @@
-# A pomodoro timer created with React + Electron
+# Pomodoro App
 
----
+Ein kleiner Pomodoro-Timer mit React, TypeScript und Electron. Die Oberfläche verwendet einen rosa Pixel-Art-Hintergrund und bietet Fokus- sowie Pausenintervalle.
 
-## Prerequisites
+## Voraussetzungen
 
-- Node.js installed: https://nodejs.org/en/download
+- Node.js und npm
 
-### Getting Started with Create React App
+## Installation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+Im Projektordner ausführen:
 
-To create your own app run:
-
-```
-npx create-react-app pomodoro --template typescript
+```bash
+npm install
 ```
 
-### Install electron 
+## Anwendung starten
 
-```
-npx create-react-app pomodoro --template typescript
-```
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### Run
-
-```
+```bash
 npm start
 ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Die Web-App läuft standardmäßig unter [http://localhost:3000](http://localhost:3000).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Für die Electron-Version zuerst die Web-App starten und anschließend in einem zweiten Terminal ausführen:
 
-### Test
-```
-npm test
-```
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### Build
-
-```
-npm run build
-```
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### Run electron app
-
-
-```
+```bash
 npm run electron
 ```
 
-## Learn More
+## Timer
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Focus** startet ein 25-Minuten-Intervall.
+- **Break** startet ein 5-Minuten-Intervall.
+- **Start** beginnt den gewählten Timer; **Reset** setzt ihn zurück.
+- Nach Ablauf spielt ein Signalton und der Timer wird für den nächsten Intervall zurückgesetzt.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Build
 
-To learn about Electron go to [Electron documentation](https://www.electronjs.org/docs/latest/).
+```bash
+npm run build
+```
 
-## Images & Sound
+Das Produktions-Build liegt anschließend im Ordner `build`.
 
-The images I am using are AI generated
+## Assets
 
-Sound Effect by <a href="https://pixabay.com/users/alexis_gaming_cam-50011695">ALEXIS_GAMING_CAM</a> from <a href="https://pixabay.com/sound-effects">Pixabay</a>
+Der Hintergrund und der Signalton liegen unter `src/assets`. Der Signalton stammt von [ALEXIS_GAMING_CAM auf Pixabay](https://pixabay.com/users/alexis_gaming_cam-50011695/).
